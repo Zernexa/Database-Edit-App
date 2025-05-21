@@ -10,3 +10,23 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 CMakeUserPresets.json
+Aplicatie1/build/
+Aplicatie1/*.user
+Aplicatie1/*.autosave
+
+# Build files
+/build/
+/bin/
+
+# CMake files
+
+CMakeFiles/
+*.cmake
+
+# Qt Creator
+*.user
+*.pro.user*
+
+# OS junk
+.DS_Store
+Thumbs.db
