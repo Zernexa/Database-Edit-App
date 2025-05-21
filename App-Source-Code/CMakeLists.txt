@@ -12,6 +12,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 
+add_executable(Aplicatie1
+        main.cpp
+        mainwindow.cpp
+        mainwindow.h
+        mainwindow.ui
+        database.cpp
+        database.h
+)
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
@@ -38,41 +47,57 @@ set(PROJECT_SOURCES
 #         mainwindow.ui
 # )
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Aplicatie1
-        MANUAL_FINALIZATION
-        ${PROJECT_SOURCES}
-        # adduserdialog.h adduserdialog.cpp adduserdialog.ui
-        # viewuserdialog.h viewuserdialog.cpp viewuserdialog.ui
-        # edituserdialog.h edituserdialog.cpp edituserdialog.ui
-        mainwindow.ui
-        database.cpp
-        database.h
-        users.db
-    )
+set(DB_SOURCE "${CMAKE_SOURCE_DIR}/users.db")
+set(DB_DESTINATION "${CMAKE_BINARY_DIR}/users.db")
+
+add_custom_command(
+    TARGET Aplicatie1 PRE_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${DB_SOURCE}"
+        "${DB_DESTINATION}"
+    COMMENT "Copying users.db to build directory"
+)
+
+# if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
+#     qt_add_executable(Aplicatie1
+#         MANUAL_FINALIZATION
+#         ${PROJECT_SOURCES}
+#         # adduserdialog.h adduserdialog.cpp adduserdialog.ui
+#         # viewuserdialog.h viewuserdialog.cpp viewuserdialog.ui
+#         # edituserdialog.h edituserdialog.cpp edituserdialog.ui
+#         mainwindow.ui
+#         database.cpp
+#         database.h
+#         users.db
+#     )
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Aplicatie1 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-else()
-    if(ANDROID)
-        add_library(Aplicatie1 SHARED
-            ${PROJECT_SOURCES}
-        )
+
+# else()
+#     if(ANDROID)
+#         add_library(Aplicatie1 SHARED
+#             ${PROJECT_SOURCES}
+#         )
+
 # Define properties for Android with Qt 5 after find_package() calls as:
 #    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-    else()
-        add_executable(Aplicatie1
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+
+#     else()
+#         add_executable(Aplicatie1
+#             ${PROJECT_SOURCES}
+#         )
+#     endif()
+# endif()
 
 target_link_libraries(Aplicatie1 PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Sql)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
+
 if(${QT_VERSION} VERSION_LESS 6.1.0)
   set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.Aplicatie1)
 endif()

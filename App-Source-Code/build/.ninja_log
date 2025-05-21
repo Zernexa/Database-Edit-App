@@ -1,0 +1,10 @@
+# ninja log v6
+5	502	7695332058172506	Aplicatie1_autogen/timestamp	b688dce87a043ecd
+5	502	7695332058172506	Aplicatie1_autogen/mocs_compilation.cpp	b688dce87a043ecd
+5	502	7695332058172506	C:/Users/Radu/Documents/GitHub/Database-Edit-App/App-Source-Code/build/Aplicatie1_autogen/timestamp	b688dce87a043ecd
+5	502	7695332058172506	C:/Users/Radu/Documents/GitHub/Database-Edit-App/App-Source-Code/build/Aplicatie1_autogen/mocs_compilation.cpp	b688dce87a043ecd
+513	1914	7695332058838557	CMakeFiles/Aplicatie1.dir/database.cpp.obj	8bb71b3f80abbf6f
+506	2147	7695332058765875	CMakeFiles/Aplicatie1.dir/Aplicatie1_autogen/mocs_compilation.cpp.obj	5af71a7cfc3e064d
+508	2168	7695332058790269	CMakeFiles/Aplicatie1.dir/main.cpp.obj	82e649b292cd6aa8
+510	2636	7695332058810198	CMakeFiles/Aplicatie1.dir/mainwindow.cpp.obj	86983b38c987996a
+2636	2862	7695332080076010	Aplicatie1.exe	b671b076eff87631
